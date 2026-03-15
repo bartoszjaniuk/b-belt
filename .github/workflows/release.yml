@@ -1,12 +1,11 @@
 name: Release
 
-# Uruchomienie: push tagu "release" lub "release-*" (np. git tag release && git push origin release).
-# semantic-release działa na branchu main i sam tworzy tag wersji (v0.0.2) oraz publikuje na npm.
+# Każdy push na main uruchamia release. semantic-release analizuje commity (Conventional Commits)
+# i sam bumpuje wersję: feat: → minor, fix: → patch, BREAKING CHANGE → major.
 on:
   push:
-    tags:
-      - "release"
-      - "release-*"
+    branches:
+      - main
 
 jobs:
   release:
@@ -18,7 +17,6 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
         with:
-          ref: main
           fetch-depth: 0
 
       - name: Setup Node.js
@@ -33,12 +31,14 @@ jobs:
       - name: Install peer dependencies
         run: npm install axios --no-save
 
+      - name: Test
+        run: npm test
+
       - name: Build
         run: npm run build
 
       - name: Release
         env:
-          GITHUB_REF: refs/heads/main
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: npx semantic-release
