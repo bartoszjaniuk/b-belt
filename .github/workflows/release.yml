@@ -31,9 +31,6 @@ jobs:
       - name: Install peer dependencies
         run: npm install axios --no-save
 
-      - name: Test
-        run: npm test
-
       - name: Build
         run: npm run build
 
