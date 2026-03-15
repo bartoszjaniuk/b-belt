@@ -1,7 +1,5 @@
-name: Release
+name: Release Pipeline
 
-# Każdy push na main uruchamia release. semantic-release analizuje commity (Conventional Commits)
-# i sam bumpuje wersję: feat: → minor, fix: → patch, BREAKING CHANGE → major.
 on:
   push:
     branches:
@@ -9,33 +7,34 @@ on:
 
 jobs:
   release:
+    name: Build, Test and Release
     runs-on: ubuntu-latest
+
     permissions:
       contents: write
+      issues: write
+      pull-requests: write
 
     steps:
-      - name: Checkout
+      - name: Checkout repository
         uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          fetch-depth: 0 # Kluczowe: pobiera pełną historię git, aby commit-analyzer zadziałał poprawnie
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
           node-version: "20"
-          cache: "npm"
 
       - name: Install dependencies
+        # npm ci to najlepsza praktyka w CI/CD, instaluje paczki dokładnie z package-lock.json
         run: npm ci
 
-      - name: Install peer dependencies
-        run: npm install axios --no-save
-
-      - name: Build
+      - name: Build project
         run: npm run build
 
-      - name: Release
+      - name: Run semantic-release
         env:
-          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Domyślny token dostarczany przez GitHub Actions
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Twój Automation Token z npm, dodany w Settings -> Secrets
         run: npx semantic-release
