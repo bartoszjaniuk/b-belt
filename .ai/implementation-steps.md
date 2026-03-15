@@ -7,6 +7,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 1: Fundament projektu
 
 ### Krok 1. Inicjalizacja repozytorium i package.json
+
 - [ ] Założyć repozytorium Git w katalogu projektu (`git init`).
 - [x] Utworzyć **package.json** z:
   - nazwą `b-belt`, wersją `0.0.1`, licencją MIT;
@@ -22,6 +23,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 2. Konfiguracja TypeScript i buildu
+
 - [x] Dodać **tsconfig.json** (strict mode, target ES2020+, generowanie `.d.ts`).
 - [x] Dodać **tsup.config.ts** z dual output:
   - ESM → `dist/index.mjs`;
@@ -36,6 +38,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 2: Implementacja interceptora
 
 ### Krok 3. Interceptor odpowiedzi (camelize)
+
 - [ ] Utworzyć katalog `src/interceptors/`.
 - [ ] Zaimplementować **src/interceptors/camelize-response.ts**:
   - sygnatura zgodna z Axios `ResponseInterceptor`;
@@ -46,6 +49,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 4. Interceptor ciała żądania (decamelize)
+
 - [ ] Zaimplementować **src/interceptors/decamelize-request.ts**:
   - sygnatura zgodna z Axios `RequestInterceptor` (`InternalAxiosRequestConfig`);
   - transformacja kluczy `config.data` z camelCase → snake_case;
@@ -55,6 +59,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 5. Interceptor parametrów query (snake_case)
+
 - [ ] Zaimplementować **src/interceptors/snake-case-query-params.ts**:
   - sygnatura jak w kroku 4;
   - transformacja **nazw** parametrów w `config.params` z camelCase → snake_case (wartości bez zmian);
@@ -64,6 +69,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 6. Punkt wejścia pakietu
+
 - [ ] Utworzyć **src/index.ts** z samymi **named exports**:
   - `camelizeResponseInterceptor`;
   - `decamelizeRequestInterceptor`;
@@ -76,6 +82,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 3: Testy
 
 ### Krok 7. Konfiguracja Vitest
+
 - [ ] Dodać Vitest do `devDependencies` (jeśli nie ma w kroku 1).
 - [ ] Skonfigurować Vitest (np. w `vitest.config.ts` lub w `package.json`), target TypeScript.
 - [ ] Uruchomić `vitest run` — na razie bez testów (opcjonalnie jeden dummy test), żeby potwierdzić działanie runnera.
@@ -83,10 +90,11 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 8. Testy jednostkowe interceptora
+
 - [ ] Utworzyć katalog `__tests__/`.
-- [ ] **__tests__/camelize-response.test.ts** — happy path: odpowiedź z kluczami snake_case → camelCase (płaskie i ewentualnie zagnieżdżone, jeśli zaimplementowane).
-- [ ] **__tests__/decamelize-request.test.ts** — happy path: body z camelCase → snake_case; przypadek bez `data` lub nie-obiektu.
-- [ ] **__tests__/snake-case-query-params.test.ts** — happy path: `params` jako obiekt, nazwy camelCase → snake_case.
+- [ ] ****tests**/camelize-response.test.ts** — happy path: odpowiedź z kluczami snake_case → camelCase (płaskie i ewentualnie zagnieżdżone, jeśli zaimplementowane).
+- [ ] ****tests**/decamelize-request.test.ts** — happy path: body z camelCase → snake_case; przypadek bez `data` lub nie-obiektu.
+- [ ] ****tests**/snake-case-query-params.test.ts** — happy path: `params` jako obiekt, nazwy camelCase → snake_case.
 - [ ] Uruchomić `vitest run` i doprowadzić do 100% przechodzenia testów (zgodnie z PRD).
 
 ---
@@ -94,6 +102,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 4: Jakość kodu i commity
 
 ### Krok 9. ESLint i Prettier
+
 - [x] Dodać **ESLint** z `@typescript-eslint` i `eslint-config-prettier`.
 - [x] Dodać **Prettier** (np. `.prettierrc`).
 - [x] Uruchomić lint i format na `src/` i `__tests__/`, poprawić ewentualne błędy.
@@ -102,9 +111,10 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 10. commitlint i husky
-- [ ] Zainstalować i skonfigurować **commitlint** (Conventional Commits: `feat:`, `fix:`, `chore:`, etc.).
-- [ ] Zainstalować **husky** i dodać hook (np. `commit-msg`) uruchamiający commitlint.
-- [ ] Przetestować: commit z nieprawidłową wiadomością powinien być odrzucony.
+
+- [x] Zainstalować i skonfigurować **commitlint** (Conventional Commits: `feat:`, `fix:`, `chore:`, etc.).
+- [x] Zainstalować **husky** i dodać hook (np. `commit-msg`) uruchamiający commitlint.
+- [x] Przetestować: commit z nieprawidłową wiadomością powinien być odrzucony.
 
 **Dlaczego przed publikacją:** semantic-release opiera się na Conventional Commits; bez tego pierwszy release może być nieprzewidywalny.
 
@@ -113,7 +123,8 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 5: CI/CD i dokumentacja
 
 ### Krok 11. Workflow publikacji (GitHub Actions)
-- [ ] Założyć **publiczne repozytorium GitHub** (jeśli jeszcze nie istnieje) i zpushować kod.
+
+- [x] Założyć **publiczne repozytorium GitHub** (jeśli jeszcze nie istnieje) i zpushować kod.
 - [ ] Dodać **.github/workflows/release.yml**:
   1. Trigger: push tagu (np. `v*`).
   2. Checkout, setup Node.js 20+.
@@ -127,6 +138,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ---
 
 ### Krok 12. README i dokumentacja
+
 - [ ] Napisać **README.md** z:
   - krótkim opisem pakietu;
   - instalacją: `npm i b-belt axios`;
@@ -140,6 +152,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 6: Pierwsza publikacja
 
 ### Krok 13. Checklist przed pierwszym release
+
 - [ ] Repozytorium publiczne na GitHubie.
 - [ ] Secret `NPM_TOKEN` ustawiony w GitHub Actions.
 - [ ] Wszystkie testy przechodzą (`vitest run`).
@@ -154,16 +167,16 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 
 ## Podsumowanie kolejności
 
-| Kolejność | Działanie |
-|-----------|-----------|
-| **1** | Inicjalizacja projektu: Git, package.json, .gitignore |
-| **2** | TypeScript + tsup (tsconfig, tsup.config, exports w package.json) |
-| **3** | Implementacja trzech interceptora + src/index.ts |
-| **4** | Vitest: konfiguracja + testy dla każdego interceptora |
-| **5** | ESLint + Prettier |
-| **6** | commitlint + husky |
-| **7** | Repo GitHub, workflow release.yml, .releaserc.json, NPM_TOKEN |
-| **8** | README z przykładami |
-| **9** | Checklist przed release → tag → push → weryfikacja na npm |
+| Kolejność | Działanie                                                         |
+| --------- | ----------------------------------------------------------------- |
+| **1**     | Inicjalizacja projektu: Git, package.json, .gitignore             |
+| **2**     | TypeScript + tsup (tsconfig, tsup.config, exports w package.json) |
+| **3**     | Implementacja trzech interceptora + src/index.ts                  |
+| **4**     | Vitest: konfiguracja + testy dla każdego interceptora             |
+| **5**     | ESLint + Prettier                                                 |
+| **6**     | commitlint + husky                                                |
+| **7**     | Repo GitHub, workflow release.yml, .releaserc.json, NPM_TOKEN     |
+| **8**     | README z przykładami                                              |
+| **9**     | Checklist przed release → tag → push → weryfikacja na npm         |
 
 Po realizacji kroków 1–2 możesz równolegle rozwijać interceptory (3–6) i jakość (9–10), a następnie połączyć wszystko w CI/CD (11–13).
