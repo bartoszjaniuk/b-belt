@@ -37,4 +37,5 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Domyślny token dostarczany przez GitHub Actions
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }} # Twój Automation Token z npm, dodany w Settings -> Secrets
+          HUSKY: "0" # Wyłącz husky w CI (prepare nie uruchamia hooków przy npm publish)
         run: npx semantic-release

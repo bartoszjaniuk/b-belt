@@ -1,5 +1,5 @@
 {
-  "name": "b-belt",
+  "name": "@bartoszjaniuk/b-belt",
   "version": "0.0.1",
   "description": "utility package with axios interceptors",
   "license": "MIT",
@@ -71,5 +71,8 @@
   "bugs": {
     "url": "https://github.com/bartoszjaniuk/b-belt/issues"
   },
-  "homepage": "https://github.com/bartoszjaniuk/b-belt#readme"
+  "homepage": "https://github.com/bartoszjaniuk/b-belt#readme",
+  "publishConfig": {
+    "access": "public"
+  }
 }
