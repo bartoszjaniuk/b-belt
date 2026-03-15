@@ -10,11 +10,11 @@ This plan covers the implementation, API design, and publication flow for the `b
 
 The package exposes a single entry point with **named exports only**. No default export.
 
-| Export | Type | Axios hook | Responsibility |
-|--------|------|------------|----------------|
-| `camelizeResponseInterceptor` | Response interceptor | `onFulfilled` (response) | Transform response data keys: snake_case → camelCase |
-| `decamelizeRequestInterceptor` | Request interceptor | `onFulfilled` (request) | Transform request body keys: camelCase → snake_case |
-| `snakeCaseQueryParamsInterceptor` | Request interceptor | `onFulfilled` (request) | Transform query parameter names: camelCase → snake_case |
+| Export                            | Type                 | Axios hook               | Responsibility                                          |
+| --------------------------------- | -------------------- | ------------------------ | ------------------------------------------------------- |
+| `camelizeResponseInterceptor`     | Response interceptor | `onFulfilled` (response) | Transform response data keys: snake_case → camelCase    |
+| `decamelizeRequestInterceptor`    | Request interceptor  | `onFulfilled` (request)  | Transform request body keys: camelCase → snake_case     |
+| `snakeCaseQueryParamsInterceptor` | Request interceptor  | `onFulfilled` (request)  | Transform query parameter names: camelCase → snake_case |
 
 **Entry:** `index.ts` (built as `dist/index.mjs` / `dist/index.js`).  
 **Tree-shaking:** Relies on ESM and bundler; consumers import only what they use.
@@ -51,10 +51,10 @@ The package exposes a single entry point with **named exports only**. No default
 
 ## 4. Implementation Structure
 
-- **Source:**  
-  - `src/interceptors/camelize-response.ts`  
-  - `src/interceptors/decamelize-request.ts`  
-  - `src/interceptors/snake-case-query-params.ts`  
+- **Source:**
+  - `src/interceptors/camelize-response.ts`
+  - `src/interceptors/decamelize-request.ts`
+  - `src/interceptors/snake-case-query-params.ts`
   - `src/index.ts` — re-exports the three interceptors (named only).
 - **Types:** Emit `.d.ts` from TypeScript; depend on Axios types (via `@types/axios` or Axios’ own types if present) and expose no custom config types in MVP.
 - **Transformations:** Use only `change-case` (e.g. `camelCase`, `snakeCase`). No custom character logic.
@@ -65,15 +65,15 @@ The package exposes a single entry point with **named exports only**. No default
 ## 5. Build and Package Layout
 
 - **Build tool:** tsup.
-- **Outputs:**  
-  - ESM: `dist/index.mjs`  
-  - CJS: `dist/index.js`  
+- **Outputs:**
+  - ESM: `dist/index.mjs`
+  - CJS: `dist/index.js`
   - Types: `dist/index.d.ts` (or equivalent from tsup).
-- **package.json:**  
-  - `main`, `module`, `types` pointing to `dist/`;  
-  - `exports` map for conditional entry (import / require / types);  
-  - `files`: include only `dist` and optionally README/LICENSE;  
-  - `engines`: `"node": ">=20"`;  
+- **package.json:**
+  - `main`, `module`, `types` pointing to `dist/`;
+  - `exports` map for conditional entry (import / require / types);
+  - `files`: include only `dist` and optionally README/LICENSE;
+  - `engines`: `"node": ">=20"`;
   - No config options in package API for MVP.
 
 ---
@@ -90,16 +90,16 @@ The package exposes a single entry point with **named exports only**. No default
 ## 7. Publication and CI/CD
 
 - **Trigger:** Push of a version tag (e.g. `v0.0.1`).
-- **Pipeline (GitHub Actions):**  
-  1. Checkout.  
-  2. Setup Node (20+).  
-  3. Install dependencies (including peer for tests).  
-  4. Run tests.  
-  5. Build (tsup).  
+- **Pipeline (GitHub Actions):**
+  1. Checkout.
+  2. Setup Node (20+).
+  3. Install dependencies (including peer for tests).
+  4. Run tests.
+  5. Build (tsup).
   6. Run semantic-release: analyze commits (Conventional Commits), bump version, generate CHANGELOG, publish to npm, create GitHub Release.
 - **Secrets:** `NPM_TOKEN` (npm Automation Token) in GitHub Actions secrets.
 - **Versioning:** Semver; initial version `0.0.1`; `fix:` → patch, `feat:` → minor, `BREAKING CHANGE` → major.
-- **Prerequisites:** Public GitHub repository; npm package name `b-belt` reserved (or adjusted); commitlint + husky enforcing Conventional Commits so semantic-release can run correctly.
+- **Prerequisites:** Public GitHub repository; npm package `@i3artosh/b-belt` (scoped); commitlint + husky enforcing Conventional Commits so semantic-release can run correctly.
 
 ---
 
@@ -112,25 +112,25 @@ The package exposes a single entry point with **named exports only**. No default
 
 ## 9. Documentation
 
-- **README:** Installation (`npm i b-belt axios`), minimal usage example: create Axios instance, attach all three interceptors, show one request and response with converted keys. Mention tree-shaking (named imports). Link to npm and repo. Satisfies PRD success criterion for “README zawiera przykłady użycia”.
+- **README:** Installation (`npm i @i3artosh/b-belt axios`), minimal usage example: create Axios instance, attach all three interceptors, show one request and response with converted keys. Mention tree-shaking (named imports). Link to npm and repo. Satisfies PRD success criterion for “README zawiera przykłady użycia”.
 
 ---
 
 ## 10. Checklist Before First Publish
 
-1. Repository created and public on GitHub.  
-2. `NPM_TOKEN` added to GitHub Actions secrets.  
-3. Project structure, three interceptors, and `index.ts` in place.  
-4. tsup build produces ESM + CJS + types; `package.json` and `exports` correct.  
-5. All Vitest tests pass.  
-6. semantic-release and release workflow run on tag push (e.g. `v0.0.1`).  
+1. Repository created and public on GitHub.
+2. `NPM_TOKEN` added to GitHub Actions secrets.
+3. Project structure, three interceptors, and `index.ts` in place.
+4. tsup build produces ESM + CJS + types; `package.json` and `exports` correct.
+5. All Vitest tests pass.
+6. semantic-release and release workflow run on tag push (e.g. `v0.0.1`).
 7. README with usage examples; package visible on npm and installable.
 
 ---
 
 ## 11. Out of Scope (MVP)
 
-- Configurable interceptors (e.g. custom key maps or toggles).  
-- Support for HTTP clients other than Axios.  
-- Formal handling of edge cases: circular references, non-plain objects, mixed/custom casing; these can be documented as limitations or best-effort.  
+- Configurable interceptors (e.g. custom key maps or toggles).
+- Support for HTTP clients other than Axios.
+- Formal handling of edge cases: circular references, non-plain objects, mixed/custom casing; these can be documented as limitations or best-effort.
 - Lazy or optional recursive behavior is an implementation detail; the plan assumes either recursive key conversion or clearly documented shallow behavior.

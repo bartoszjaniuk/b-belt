@@ -141,7 +141,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 
 - [ ] Napisać **README.md** z:
   - krótkim opisem pakietu;
-  - instalacją: `npm i b-belt axios`;
+  - instalacją: `npm i @i3artosh/b-belt axios`;
   - przykładem użycia: utworzenie instancji Axios, podpięcie wszystkich trzech interceptora, przykładowe żądanie i odpowiedź z konwersją kluczy;
   - informacją o tree-shaking (named imports);
   - linkami do npm i repozytorium.
@@ -158,7 +158,7 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 - [ ] Wszystkie testy przechodzą (`vitest run`).
 - [ ] Build działa; `dist/` zawiera ESM, CJS i typy.
 - [ ] commitlint + husky działają; commity w Conventional Commits.
-- [ ] Nazwa pakietu `b-belt` zarezerwowana na npm (sprawdzić dostępność).
+- [x] Pakiet publikowany jako `@i3artosh/b-belt` na npm.
 - [ ] Wykonać commit(y) z odpowiednimi prefiksami (np. `feat: add interceptors`), push.
 - [ ] Utworzyć i zpushować tag wersji, np. `git tag v0.0.1 && git push origin v0.0.1`.
 - [ ] Sprawdzić uruchomienie workflowu w zakładce Actions; po sukcesie — paczka na npm i GitHub Release.

@@ -10,11 +10,11 @@
 
 Paczka eksportuje trzy interceptory przez pojedynczy plik `index.ts`:
 
-| Interceptor | Kierunek | Opis |
-|---|---|---|
-| `camelizeResponseInterceptor` | response | Konwertuje klucze odpowiedzi z `snake_case` → `camelCase` |
-| `decamelizeRequestInterceptor` | request | Konwertuje klucze ciała żądania z `camelCase` → `snake_case` |
-| `snakeCaseQueryParamsInterceptor` | request | Konwertuje query params z `camelCase` → `snake_case` |
+| Interceptor                       | Kierunek | Opis                                                         |
+| --------------------------------- | -------- | ------------------------------------------------------------ |
+| `camelizeResponseInterceptor`     | response | Konwertuje klucze odpowiedzi z `snake_case` → `camelCase`    |
+| `decamelizeRequestInterceptor`    | request  | Konwertuje klucze ciała żądania z `camelCase` → `snake_case` |
+| `snakeCaseQueryParamsInterceptor` | request  | Konwertuje query params z `camelCase` → `snake_case`         |
 
 Transformacje kluczy realizowane wyłącznie przez bibliotekę **`change-case`**.
 
@@ -61,20 +61,20 @@ b-belt/
 ## Kluczowe historie użytkownika
 
 1. **Jako deweloper** chcę zainstalować `b-belt` i w kilku linijkach podpiąć interceptory do mojej instancji Axios, żeby nie pisać ręcznie mapowania kluczy.
-2. **Jako deweloper** chcę importować tylko potrzebne interceptory (`import { camelizeResponseInterceptor } from 'b-belt'`), a bundler automatycznie usunął nieużywane.
+2. **Jako deweloper** chcę importować tylko potrzebne interceptory (`import { camelizeResponseInterceptor } from '@i3artosh/b-belt'`), a bundler automatycznie usunął nieużywane.
 3. **Jako autor paczki** chcę, żeby po wykonaniu `git push` z odpowiednim tagiem cały proces publikacji na npm odbył się automatycznie bez mojej interwencji.
 
 ---
 
 ## Kryteria sukcesu
 
-| Kryterium | Sposób weryfikacji |
-|---|---|
-| Paczka opublikowana na npmjs.com | Widoczna pod `npmjs.com/package/b-belt` |
-| Automatyczna publikacja przez CI/CD | GitHub Actions przechodzi zielono po pushu tagu |
-| Wszystkie 3 interceptory przetestowane | 100% testów Vitest przechodzi (`vitest run`) |
-| Dual build działa | Import działa w projekcie ESM i CJS |
-| README zawiera przykłady użycia | Dokumentacja widoczna na stronie paczki npm |
+| Kryterium                              | Sposób weryfikacji                                |
+| -------------------------------------- | ------------------------------------------------- |
+| Paczka opublikowana na npmjs.com       | Widoczna pod `npmjs.com/package/@i3artosh/b-belt` |
+| Automatyczna publikacja przez CI/CD    | GitHub Actions przechodzi zielono po pushu tagu   |
+| Wszystkie 3 interceptory przetestowane | 100% testów Vitest przechodzi (`vitest run`)      |
+| Dual build działa                      | Import działa w projekcie ESM i CJS               |
+| README zawiera przykłady użycia        | Dokumentacja widoczna na stronie paczki npm       |
 
 ---
 
@@ -83,6 +83,7 @@ b-belt/
 **Trigger**: push tagu git (np. `v0.0.1`)
 
 **Kroki w GitHub Actions**:
+
 1. Checkout kodu
 2. Setup Node.js
 3. Install dependencies
