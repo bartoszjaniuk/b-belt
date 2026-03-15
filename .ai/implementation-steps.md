@@ -94,10 +94,10 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ## Faza 4: Jakość kodu i commity
 
 ### Krok 9. ESLint i Prettier
-- [ ] Dodać **ESLint** z `@typescript-eslint` i `eslint-config-prettier`.
-- [ ] Dodać **Prettier** (np. `.prettierrc`).
-- [ ] Uruchomić lint i format na `src/` i `__tests__/`, poprawić ewentualne błędy.
-- [ ] (Opcjonalnie) dodać skrypt `lint` w package.json i ewentualnie hook przed commitem.
+- [x] Dodać **ESLint** z `@typescript-eslint` i `eslint-config-prettier`.
+- [x] Dodać **Prettier** (np. `.prettierrc`).
+- [x] Uruchomić lint i format na `src/` i `__tests__/`, poprawić ewentualne błędy.
+- [x] (Opcjonalnie) dodać skrypt `lint` w package.json i ewentualnie hook przed commitem.
 
 ---
 

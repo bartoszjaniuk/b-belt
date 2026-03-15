@@ -1,3 +1,3 @@
 export const isScreamingCase = (str: string) => {
-	return str === str.toUpperCase();
+  return str === str.toUpperCase();
 };

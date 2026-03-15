@@ -1,2 +1,1 @@
-export const validateStatus = (status: number) =>
-	(status >= 200 && status < 300) || status === 304;
+export const validateStatus = (status: number) => (status >= 200 && status < 300) || status === 304;
