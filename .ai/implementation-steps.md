@@ -92,9 +92,9 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ### Krok 8. Testy jednostkowe interceptora
 
 - [ ] Utworzyć katalog `__tests__/`.
-- [ ] ****tests**/camelize-response.test.ts** — happy path: odpowiedź z kluczami snake_case → camelCase (płaskie i ewentualnie zagnieżdżone, jeśli zaimplementowane).
-- [ ] ****tests**/decamelize-request.test.ts** — happy path: body z camelCase → snake_case; przypadek bez `data` lub nie-obiektu.
-- [ ] ****tests**/snake-case-query-params.test.ts** — happy path: `params` jako obiekt, nazwy camelCase → snake_case.
+- [ ] \***\*tests**/camelize-response.test.ts\*\* — happy path: odpowiedź z kluczami snake_case → camelCase (płaskie i ewentualnie zagnieżdżone, jeśli zaimplementowane).
+- [ ] \***\*tests**/decamelize-request.test.ts\*\* — happy path: body z camelCase → snake_case; przypadek bez `data` lub nie-obiektu.
+- [ ] \***\*tests**/snake-case-query-params.test.ts\*\* — happy path: `params` jako obiekt, nazwy camelCase → snake_case.
 - [ ] Uruchomić `vitest run` i doprowadzić do 100% przechodzenia testów (zgodnie z PRD).
 
 ---
@@ -125,15 +125,15 @@ Lista kroków do zrealizowania w kolejności, na podstawie [prd.md](prd.md) oraz
 ### Krok 11. Workflow publikacji (GitHub Actions)
 
 - [x] Założyć **publiczne repozytorium GitHub** (jeśli jeszcze nie istnieje) i zpushować kod.
-- [ ] Dodać **.github/workflows/release.yml**:
+- [x] Dodać **.github/workflows/release.yml**:
   1. Trigger: push tagu (np. `v*`).
   2. Checkout, setup Node.js 20+.
   3. Install dependencies (z peer dla testów).
   4. Uruchomienie testów (`vitest run`).
   5. Build (`tsup`).
   6. Uruchomienie **semantic-release** (bump wersji, CHANGELOG, publikacja npm, GitHub Release).
-- [ ] Dodać **.releaserc.json** (lub odpowiednik) z pluginami: commit-analyzer, release-notes-generator, changelog, npm, github.
-- [ ] W ustawieniach repozytorium dodać secret **NPM_TOKEN** (npm Automation Token) — zgodnie z sekcją PRD „Jak wygenerować npm Automation Token”.
+- [x] Dodać **.releaserc.json** (lub odpowiednik) z pluginami: commit-analyzer, release-notes-generator, changelog, npm, github.
+- [x] W ustawieniach repozytorium dodać secret **NPM_TOKEN** (npm Automation Token) — zgodnie z sekcją PRD „Jak wygenerować npm Automation Token”.
 
 ---
 
